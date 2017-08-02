@@ -6,7 +6,7 @@
 
     <groupId>de.sabbertran.proxytickets.bukkit</groupId>
     <artifactId>ProxyTicketsBukkit</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <build>
         <plugins>
             <plugin>
@@ -32,13 +32,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.10-R0.1-SNAPSHOT</version>
+            <version>1.12-R0.1-SNAPSHOT</version>
         </dependency>
         <!--Bukkit API-->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.10-R0.1-SNAPSHOT</version>
+            <version>1.12-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
