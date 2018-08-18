@@ -1,6 +1,7 @@
 name: ProxyTicketsBukkit
 main: de.sabbertran.proxytickets.bukkit.ProxyTicketsBukkit
-version: 1.0.4
+version: 1.1.0
 website: http://www.sabbertran.de
 author: Sabbertran
+maintainer: AeSix
 description: ProxyTickets Bukkit handler
