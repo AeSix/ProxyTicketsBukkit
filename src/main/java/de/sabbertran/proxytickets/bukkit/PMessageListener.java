@@ -2,6 +2,7 @@ package de.sabbertran.proxytickets.bukkit;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -36,7 +37,9 @@ public class PMessageListener implements PluginMessageListener {
             if (w != null) {
                 Location destination = new Location(w, x, Double.parseDouble(y), z, yaw, pitch);
                 if (p != null && p.isOnline())
+                    p.setGameMode(GameMode.SPECTATOR);
                     p.teleport(destination);
+                    p.sendMessage("For your safety, You are in Spectator mode");
                 else
                     main.getPendingLocationTeleports().put(player, destination);
             }
