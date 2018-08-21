@@ -37,24 +37,16 @@ public class PMessageListener implements PluginMessageListener {
             if (w != null) {
                 Location destination = new Location(w, x, Double.parseDouble(y), z, yaw, pitch);
                 if (p != null && p.isOnline()) {
-#                    final GameMode taskGM = p.getGameMode();
                     p.setGameMode(GameMode.SPECTATOR);
                     p.teleport(destination);
                     p.sendMessage("For your safety, You are in Spectator mode");
-#                    final Player taskPerson = p;
-#                    new BukkitRunnable() {
-#                        @Override
-#                        public void run() {
-#                            taskPerson.setGameMode(taskGM);
-#                            taskPerson.sendMessage("We have set you back to your previous mode...");
-#                        }
-#                    }.runTaskLater(this.plugin, 20);
                 }
                 else {
                     main.getPendingLocationTeleports().put(player, destination);
                 }
             }
-        } else if (subchannel.equals("GetPosition")) {
+        }
+        else if (subchannel.equals("GetPosition")) {
             String player = in.readUTF();
             String server = in.readUTF();
             Player p = main.getServer().getPlayer(player);
