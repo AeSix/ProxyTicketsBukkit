@@ -17,9 +17,12 @@ public class Events implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
-        if (main.getPendingLocationTeleports().containsKey(p.getName()))
-            p.setGameMode(GameMode.SPECTATOR);
-            p.teleport(main.getPendingLocationTeleports().remove(p.getName()));
-            p.sendMessage("For your safety, You are in Specator mode");
+        if(main.getPendingLocationTeleports()!=null) {
+            if (main.getPendingLocationTeleports().containsKey(p.getName())) {
+                p.setGameMode(GameMode.SPECTATOR);
+                p.teleport(main.getPendingLocationTeleports().remove(p.getName()));
+                p.sendMessage("For your safety, You are in Spectator mode");
+            }
+        }
     }
 }

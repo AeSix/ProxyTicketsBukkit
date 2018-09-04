@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -37,9 +38,21 @@ public class PMessageListener implements PluginMessageListener {
             if (w != null) {
                 Location destination = new Location(w, x, Double.parseDouble(y), z, yaw, pitch);
                 if (p != null && p.isOnline()) {
+                    int sec = 20;
+                    final GameMode taskGM = p.getGameMode();
                     p.setGameMode(GameMode.SPECTATOR);
                     p.teleport(destination);
-                    p.sendMessage("For your safety, You are in Spectator mode");
+                    p.sendMessage("For your safety, You are in Spectator mode, you will turn back in " + sec + " seconds");
+
+                    final Player taskPerson = p;
+
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            taskPerson.setGameMode(taskGM);
+                            taskPerson.sendMessage("We have set you back to your previous mode...");
+                        }
+                    }.runTaskLater(ProxyTicketsBukkit.plugin, sec*20);
                 }
                 else {
                     main.getPendingLocationTeleports().put(player, destination);
@@ -112,7 +125,9 @@ public class PMessageListener implements PluginMessageListener {
                             }
                             p.sendPluginMessage(main, "ProxyTickets", b.toByteArray());
                         }
-                    } catch (EOFException | IllegalStateException ex) {
+                    } catch (EOFException ex1 ){
+
+                    } catch (IllegalStateException ex2) {
 
                     }
                 } catch (IOException e) {

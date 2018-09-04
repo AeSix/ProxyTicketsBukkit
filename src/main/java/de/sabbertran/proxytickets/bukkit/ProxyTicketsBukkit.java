@@ -6,14 +6,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 
 public class ProxyTicketsBukkit extends JavaPlugin {
+
+    public static ProxyTicketsBukkit plugin;
     private HashMap<String, Location> pendingLocationTeleports;
 
     @Override
     public void onEnable() {
         pendingLocationTeleports = new HashMap<String, Location>();
+        plugin = this;
 
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "ProxyTickets");
-        getServer().getMessenger().registerIncomingPluginChannel(this, "ProxyTickets", new PMessageListener(this));
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "minecats:proxytickets");
+        getServer().getMessenger().registerIncomingPluginChannel(this, "minecats:proxytickets", new PMessageListener(this));
 
         getServer().getPluginManager().registerEvents(new Events(this), this);
 
