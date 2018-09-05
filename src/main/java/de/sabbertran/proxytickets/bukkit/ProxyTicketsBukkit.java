@@ -9,14 +9,15 @@ public class ProxyTicketsBukkit extends JavaPlugin {
 
     public static ProxyTicketsBukkit plugin;
     private HashMap<String, Location> pendingLocationTeleports;
+    public static String ChannelName = "minecats:proxytickets";
 
     @Override
     public void onEnable() {
         pendingLocationTeleports = new HashMap<String, Location>();
         plugin = this;
 
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "minecats:proxytickets");
-        getServer().getMessenger().registerIncomingPluginChannel(this, "minecats:proxytickets", new PMessageListener(this));
+        getServer().getMessenger().registerOutgoingPluginChannel(this, ChannelName);
+        getServer().getMessenger().registerIncomingPluginChannel(this, ChannelName, new PMessageListener(this));
 
         getServer().getPluginManager().registerEvents(new Events(this), this);
 

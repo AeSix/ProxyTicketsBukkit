@@ -23,8 +23,12 @@ public class PMessageListener implements PluginMessageListener {
     }
 
     public void onPluginMessageReceived(String channel, Player pl, byte[] message) {
+
+
+
         ByteArrayDataInput in = ByteStreams.newDataInput(message);
         String subchannel = in.readUTF();
+
         if (subchannel.equals("Teleport")) {
             String player = in.readUTF();
             Player p = main.getServer().getPlayer(player);
@@ -79,9 +83,10 @@ public class PMessageListener implements PluginMessageListener {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                p.sendPluginMessage(main, "ProxyTickets", b.toByteArray());
+                p.sendPluginMessage(main, ProxyTicketsBukkit.ChannelName, b.toByteArray());
             }
         } else if (subchannel.equals("GetPermissions")) {
+
             String player = in.readUTF();
             Player p = main.getServer().getPlayer(player);
             if (p != null) {
@@ -92,7 +97,8 @@ public class PMessageListener implements PluginMessageListener {
                         out.writeUTF("Permissions");
                         out.writeUTF(p.getName());
                         out.writeUTF("*");
-                        p.sendPluginMessage(main, "ProxyTickets", b.toByteArray());
+
+                        p.sendPluginMessage(main, ProxyTicketsBukkit.ChannelName, b.toByteArray());
                     }
                     String permission;
                     try {
@@ -123,7 +129,7 @@ public class PMessageListener implements PluginMessageListener {
                                     }
                                 }
                             }
-                            p.sendPluginMessage(main, "ProxyTickets", b.toByteArray());
+                            p.sendPluginMessage(main, ProxyTicketsBukkit.ChannelName, b.toByteArray());
                         }
                     } catch (EOFException ex1 ){
 
